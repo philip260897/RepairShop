@@ -21,10 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-/**
- *
- * @author Philip
- */
+
 public class RepairShopListener implements Listener{
     private final RepairShop plugin;
 
