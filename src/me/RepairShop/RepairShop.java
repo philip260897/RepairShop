@@ -16,15 +16,9 @@ public class RepairShop extends JavaPlugin
     private final RepairShopListener Listener = new RepairShopListener(this);
     public final EconomyManager EM = new EconomyManager(this);
     public final PermissionsManager PM = new PermissionsManager(this);
-    //public static PermissionManager permissionHandler;
     public final ConfigManager config = new ConfigManager(this);
     public final MessageManager messages = new MessageManager(this);
-    //public ConfigManager config = new ConfigManager();
-    //private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 
-    // NOTE: There should be no need to define a constructor any more for more info on moving from
-    // the old constructor see:
-    // http://forums.bukkit.org/threads/too-long-constructor.5032/
 
     @Override
     public void onDisable() 
