@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.RepairShop;
 
 import com.iCo6.system.Account;
@@ -316,25 +312,7 @@ public void Tools(Player player, String line1, String line2, String line3, ItemS
 
     if (event.getLine(0).equals("[repair]"))
     {
-      permissionsPlugin = server.getPluginManager().getPlugin("PermissionsEx");
-      if (permissionsPlugin == null)
-      {
-        if (player.isOp())
-        {
-          event.setLine(3, ChatColor.GREEN + "[Active]");
-
-          player.sendMessage(this.plugin.messages.create_successfull(Prefix));
-          player.sendMessage(this.plugin.messages.repair_create_message(Prefix, Art, Preis, Currency));
-        }
-        else
-        {
-          event.setLine(3, ChatColor.RED + "[Inactive]");
-
-          player.sendMessage(this.plugin.messages.no_permission(Prefix));
-        }
-
-      }
-      else if ((plugin.PM.hasPermission(player, "RepairShop.create")) || (player.isOp()))
+      if ((plugin.PM.hasPermission(player, "RepairShop.create") == true) || (player.isOp()))
       {
         event.setLine(3, ChatColor.GREEN + "[Active]");
 
