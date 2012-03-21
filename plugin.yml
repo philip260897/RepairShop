@@ -1,0 +1,7 @@
+name: RepairShop
+main: me.RepairShop.RepairShop
+version: 2.0
+commands:
+  rp:
+    description: All commands for RepairShop. /rp ? for Help.
+    usage: /rp
