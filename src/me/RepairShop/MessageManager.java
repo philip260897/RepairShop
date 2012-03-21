@@ -60,6 +60,14 @@ public class MessageManager {
                 config.set("Messages.create_successfull", ("<Prefix> &7The repair shop has been created successfully!"));
                 config.set("Messages.repair_create_message", ("<Prefix> &7In this shop you can repair <type> for <cost> <currency>!"));
                 config.set("Messages.no_permission", ("<Prefix> &7You don't have permission to do that!"));
+                config.set("Messages.wrong_format", ("<Prefix> &7Your sign had the wrong format!"));
+                config.set("Messages.shop_owner_not _exist", ("<Prefix> &7This Shop owner doesnt exist!"));
+                config.set("Messages.error_occured", ("<Prefix> &7An error occured. Please contact the shop owner!"));
+                config.set("Messages.no_chest_found", ("<Prefix> &7No chest has been found. Please contact the shop owner!"));
+                config.set("Messages.invalid_repair_type", ("<Prefix> &7This is an invalid repair type!"));
+                config.set("Messages.no_resources", ("<Prefix> &7There are no resources in this shop!"));
+                config.set("Messages.notify_player_bought", ("<Prefix> &7<Player> has repaired <type> for <cost> <currency> in your shop."));
+                config.set("Messages.running_out_of_resources", ("<Prefix> &7One of your shops is running out of resources!"));
                 config.save(configFile);
                
             }catch (Exception e)
@@ -111,6 +119,54 @@ public class MessageManager {
     public String no_permission (String Prefix)
     {
         String Money = config.getString("Messages.no_permission").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String wrong_format (String Prefix)
+    {
+        String Money = config.getString("Messages.wrong_format").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String shop_owner_no_exist (String Prefix)
+    {
+        String Money = config.getString("Messages.shop_owner_no_exist").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String error_occured (String Prefix)
+    {
+        String Money = config.getString("Messages.error_occured").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String no_chest_found (String Prefix)
+    {
+        String Money = config.getString("Messages.no_chest_found").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String invalid_repair_type (String Prefix)
+    {
+        String Money = config.getString("Messages.invalid_repair_type").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String no_resources (String Prefix)
+    {
+        String Money = config.getString("Messages.no_resources").replace("&", "§").replace("<Prefix>", Prefix);
+        return Money;
+    } 
+    
+    public String notify_player_bought ( String player, String Prefix, String type, String cost, String currency)
+    {
+        String Money = config.getString("Messages.notify_player_bought").replace("&", "§").replace("<type>", type).replace("<cost>", cost).replace("<Player>", player).replace("<Prefix>", Prefix).replace("<currency>", currency);
+        return Money;
+    }
+    
+    public String running_out_of_resources (String Prefix)
+    {
+        String Money = config.getString("Messages.running_out_of_resources").replace("&", "§").replace("<Prefix>", Prefix);
         return Money;
     } 
     

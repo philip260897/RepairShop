@@ -6,6 +6,8 @@ package me.RepairShop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
@@ -26,7 +28,10 @@ public class ConfigManager {
     private static String ordner = "plugins/RepairShop";
     private static File configFile = new File(ordner + File.separator + "config.yml");
     private static YamlConfiguration config;
-    public double version = 1.1;
+    public double version = 2.0;
+    public String M = "Resources.";
+    public Map<String, Object> TempPlayerList;
+    public HashMap<String, String> TypeList = new HashMap<String, String>();
 
     
     private YamlConfiguration loadConfig()
@@ -60,33 +65,81 @@ public class ConfigManager {
                 config = loadConfig();
                 config.set("version", version);
                 config.save(configFile);
+                config = loadConfig();
+                config.set(M+"DIAMOND_TOOLS"+".Amount", 3);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"GOLD_TOOLS"+".Amount", 3);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"IRON_TOOLS"+".Amount", 3);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"STONE_TOOLS"+".Amount", 3);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"WOOD_TOOLS"+".Amount", 3);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"DIAMOND_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"GOLD_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"IRON_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"STONE_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"WOOD_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"BOW_WEAPON"+".Amount", 4);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"DIAMOND_ARMOR"+".Amount", 5);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"GOLD_ARMOR"+".Amount", 5);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"IRON_ARMOR"+".Amount", 5);
+                config.save(configFile);
+                config = loadConfig();
+                config.set(M+"LEATHER_ARMOR"+".Amount", 5);
+                config.save(configFile);
+                
             }catch (Exception e)
                     {
                         e.printStackTrace();
                     }
         }
         config = loadConfig();
-        
         if(isNewVersion())
         {
-            try {
-                config = loadConfig();
-                config.set("version", null);
-                config.save(configFile);
-                config = loadConfig();
-                if(!config.contains("Action"))
-                {
-                    System.out.println("[RepairShop] Updating Config...");
-                    config.set("Action", "RIGHT_CLICK");
-                    config.save(configFile);
-                }
-                config = loadConfig();
-                config.set("version", version);
-                config.save(configFile);
-            } catch (IOException ex) {
-                Logger.getLogger(ConfigManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            configFile.delete();
+            System.out.println("[RepairShop] Updating configuraiotn...");
+            this.createConfig();
         } 
+        
+        TempPlayerList = config.getValues(true);
+        for(String s:TempPlayerList.keySet())
+        {
+            if(s.contains(M))
+            {
+                String type = s.replace(M, "").replace(".Amount", "");
+                this.TypeList.put(type, type);
+            }
+        }
+    }
+    
+    public int getAmount(String type)
+    {
+        config = loadConfig();
+        int Amount = config.getInt(M+type.toUpperCase()+".Amount");
+        return Amount;
     }
     
     public String Currency()

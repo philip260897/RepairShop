@@ -23,7 +23,6 @@ public class EconomyManager {
     
     public boolean pay(Player player, int cost, String type)
     {
-        System.out.println("blub");
         Plugin iConomy = plugin.getServer().getPluginManager().getPlugin("iConomy");
         Plugin bEconomy = plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
         if(iConomy != null)
@@ -65,6 +64,62 @@ public class EconomyManager {
             else
             {
                 player.sendMessage(this.plugin.messages.not_enough_money(Prefix));
+            }
+        }
+        return false;
+    }
+    
+    public boolean transaction(Player player, String target, int cost, String type)
+    {
+        Plugin iConomy = plugin.getServer().getPluginManager().getPlugin("iConomy");
+        Plugin bEconomy = plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
+        if(iConomy != null)
+        {
+            String sCost = Integer.toString(cost);
+            String Prefix = this.plugin.messages.Prefix();
+            String Currency = this.plugin.config.Currency();
+            Accounts accounts = new Accounts();
+            Account account = accounts.get(player.getName());
+            Account taccount = accounts.get(target);
+            if (account.getHoldings().hasEnough(cost))
+            {
+                account.getHoldings().subtract(cost);
+                taccount.getHoldings().add(cost);
+                player.sendMessage(this.plugin.messages.repair_message(Prefix, type, sCost, Currency));
+              return true;
+            }
+            else
+            {
+              player.sendMessage(this.plugin.messages.not_enough_money(Prefix));
+            }
+        }
+        if(bEconomy != null)
+        {
+            String sCost = Integer.toString(cost);
+            String Prefix = this.plugin.messages.Prefix();
+            String Currency = this.plugin.config.Currency();
+            BOSEconomy economy = (BOSEconomy)bEconomy;
+            boolean isRegistered = economy.playerRegistered(player.getName(), true);
+            boolean istRegistered = economy.playerRegistered(target, true);
+            if(isRegistered)
+            {
+                int money = economy.getPlayerMoney(player.getName());
+                int tmoney = economy.getPlayerMoney(target);
+                if(cost <= money)
+                {
+                    economy.setBankMoney(player.getName(), money-cost, true);
+                    economy.setBankMoney(target, tmoney + cost, true);
+                    player.sendMessage(this.plugin.messages.repair_message(Prefix, type, sCost, Currency));
+                    return true;
+                }
+                else
+                {
+                  player.sendMessage(this.plugin.messages.not_enough_money(Prefix));
+                }
+            }
+            else
+            {
+                player.sendMessage(this.plugin.messages.error_occured(Prefix));
             }
         }
         return false;

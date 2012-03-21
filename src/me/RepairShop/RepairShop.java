@@ -20,6 +20,14 @@ public class RepairShop extends JavaPlugin
     public final MessageManager messages = new MessageManager(this);
 
 
+    /*To Do:
+     * Reload befehl
+     * Help liste
+     * Vielleicht lizenz
+     * Vielleicht blacklist
+     * 
+     */
+    
     @Override
     public void onDisable() 
     {
@@ -36,7 +44,8 @@ public class RepairShop extends JavaPlugin
         
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(this.Listener, this);
-
+        getCommand("rp").setExecutor(new CommandListener(this));
+        
         setupiConomy();
         setupPermissions();
 
