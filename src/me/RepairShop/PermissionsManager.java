@@ -5,6 +5,8 @@
 package me.RepairShop;
 
 import de.bananaco.bpermissions.imp.Permissions;
+import org.anjocaido.groupmanager.GlobalGroups;
+import org.anjocaido.groupmanager.GroupManager;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import ru.tehkode.permissions.PermissionManager;
@@ -26,6 +28,7 @@ public class PermissionsManager {
     {
         Plugin bPermissions = plugin.getServer().getPluginManager().getPlugin("bPermissions");
         Plugin bPermissionsEx = plugin.getServer().getPluginManager().getPlugin("PermissionsEx");
+        Plugin EssEco = plugin.getServer().getPluginManager().getPlugin("PermissionsEx");
         if(bPermissions != null)
         {
             boolean hasPermission = Permissions.hasPermission(player, permission);
@@ -37,7 +40,20 @@ public class PermissionsManager {
             boolean hasPermission = PEX.has(player, permission);
             return hasPermission;
         }
-        if(bPermissionsEx == null && bPermissions == null)
+        if(EssEco != null)
+        {
+            GlobalGroups gg = GroupManager.getGlobalGroups();
+            boolean hasPermissions = gg.hasPermission(player.getName(), permission);
+            if(hasPermissions == false)
+            {
+                
+            }
+            else
+            {
+                return hasPermissions;
+            }
+        }
+        if(bPermissionsEx == null && bPermissions == null && EssEco == null)
         {
             if(player.hasPermission(permission))
             {

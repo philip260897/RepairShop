@@ -59,6 +59,7 @@ public class RepairShop extends JavaPlugin
     {
         Plugin PEX = this.getServer().getPluginManager().getPlugin("PermissionsEx");
         Plugin bPermissions = this.getServer().getPluginManager().getPlugin("bPermissions");
+        Plugin Essentials = this.getServer().getPluginManager().getPlugin("Essentials");
         if (PEX != null)
         {
             System.out.println("[RepairShop] found "+((PermissionsEx)PEX).getDescription().getName()+" Version "+PEX.getDescription().getVersion());
@@ -69,15 +70,21 @@ public class RepairShop extends JavaPlugin
             System.out.println("[RepairShop] found bPermissions Version "+bPermissions.getDescription().getVersion());
             return;
         }
-        System.out.println("[RepairShop] No permissions-pystem found. Using Bukkit default permissions.");
+        if(Essentials != null)
+        {
+            System.out.println("[RepairShop] found Essentials Version "+Essentials.getDescription().getVersion());
+            return;
+        }
+        
+        System.out.println("[RepairShop] No permissions-system found. Using Bukkit default permissions.");
         
     }
-    
     
     private void setupiConomy()
     {
         Plugin iConomy = this.getServer().getPluginManager().getPlugin("iConomy");
         Plugin bEcon = this.getServer().getPluginManager().getPlugin("BOSEconomy");
+        Plugin Essentials = this.getServer().getPluginManager().getPlugin("Essentials");
         
         if(iConomy != null)
         {
@@ -87,6 +94,11 @@ public class RepairShop extends JavaPlugin
         if(bEcon != null)
         {
             System.out.println("[RepairShop] hooked into BOSEconomy version "+bEcon.getDescription().getVersion());
+            return;
+        }
+        if(Essentials != null)
+        {
+            System.out.println("[RepairShop] found "+Essentials.getDescription().getName()+" Version "+Essentials.getDescription().getVersion());
             return;
         }
         System.out.println("[RepairShop] No economy-system found. Disabling now.");
